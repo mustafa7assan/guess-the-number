@@ -117,6 +117,7 @@ body {
 }
 .dark .guess-form input {
   background-color: #ccc;
+  color: #333;
 }
 .guess-form input:focus {
   border: 1px solid #444;
