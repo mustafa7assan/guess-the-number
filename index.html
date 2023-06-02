@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js" defer></script>
+    <title>Guess the Number</title>
+  </head>
+  <body>
+    <div class="main-container">
+      <div class="main-buttons">
+        <button class="btn try-again-btn">Try Again</button>
+        <button class="btn toggle-theme-btn">
+          <img src="./icon/dark.svg" class="icon" alt="" />
+        </button>
+      </div>
+      <div class="guess-container">
+        <h3>Guess The Number</h3>
+        <p>I think in a number between 1 - 20.</p>
+        <div class="guess-result">Enter a guess</div>
+        <form class="guess-form">
+          <input type="text" name="guess" id="guess" required />
+          <button class="btn check-btn" type="button">Check</button>
+        </form>
+        <div class="scores">
+          <div>Score: <span class="score">20</span></div>
+          <div>Highest Score: <span class="highest-score">0</span></div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
