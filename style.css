@@ -160,3 +160,8 @@ body {
   height: 15px;
   width: 15px;
 }
+.lost,
+.dark .lost {
+  background-color: rgb(238, 38, 38);
+  color: white;
+}

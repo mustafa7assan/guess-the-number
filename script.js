@@ -11,11 +11,16 @@ const toggleTheme = document.querySelector(".toggle-theme-btn");
 const html = document.querySelector("html");
 const themeIcon = document.querySelector(".toggle-theme-btn img");
 const body = document.body;
-// Event Handlers
 
+// Event Handlers
 const generateRandomNum = () => Math.floor(Math.random() * 20) + 1;
 const updateScore = () => {
   scoreEl.textContent = score;
+  if (score === 0) {
+    guessResult.classList.add("lost");
+    guessResult.textContent = "You lost the game";
+    checkButton.textContent = "New Game";
+  }
 };
 
 const updateHighestScore = (t) => {
@@ -40,6 +45,8 @@ const newGame = () => {
   updateScore();
   guessResult.textContent = "Enter a guess";
   guessResult.classList.remove("correct");
+  guessResult.classList.remove("lost");
+
   randomNumber = generateRandomNum();
 };
 
@@ -59,14 +66,12 @@ const changeTheme = () => {
     body.style.backgroundColor = "#eee";
   }
 };
-// Listen To Events
-
-checkButton.addEventListener("click", (e) => {
+const checkGuess = (e) => {
   if (e.target.textContent === "New Game") {
     newGame();
   } else {
     const guess = Number(guessInput.value);
-    if (guess) {
+    if (guess && score > 0) {
       score--;
       guessResult.classList.remove("changed");
       void guessResult.offsetWidth;
@@ -89,11 +94,13 @@ checkButton.addEventListener("click", (e) => {
       guessResult.textContent = "No Number";
     }
   }
-});
+};
 
+// Listen To Events
+checkButton.addEventListener("click", checkGuess);
 tryAgainButton.addEventListener("click", tryAgain);
-
 toggleTheme.addEventListener("click", changeTheme);
+
 // Global Variables
 let score = 20;
 let highestScore = 0;
