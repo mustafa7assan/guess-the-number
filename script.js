@@ -10,6 +10,7 @@ const tryAgainButton = document.querySelector(".try-again-btn");
 const toggleTheme = document.querySelector(".toggle-theme-btn");
 const html = document.querySelector("html");
 const themeIcon = document.querySelector(".toggle-theme-btn img");
+const body = document.body;
 // Event Handlers
 
 const generateRandomNum = () => Math.floor(Math.random() * 20) + 1;
@@ -28,6 +29,11 @@ const updateHighestScore = (t) => {
 };
 
 const newGame = () => {
+  if (html.classList.contains("dark")) {
+    body.style.backgroundColor = "#333333";
+  } else {
+    body.style.backgroundColor = "#eee";
+  }
   checkButton.textContent = "Check";
   guessInput.value = "";
   score = 20;
@@ -47,8 +53,10 @@ const changeTheme = () => {
   html.classList.toggle("dark");
   if (themeIcon.getAttribute("src") === "./icon/dark.svg") {
     themeIcon.setAttribute("src", "./icon/light.svg");
+    body.style.backgroundColor = "#333333";
   } else {
     themeIcon.setAttribute("src", "./icon/dark.svg");
+    body.style.backgroundColor = "#eee";
   }
 };
 // Listen To Events
@@ -58,13 +66,12 @@ checkButton.addEventListener("click", (e) => {
     newGame();
   } else {
     const guess = Number(guessInput.value);
-    if (!Number.isNaN(guess) && guess !== 0) {
+    if (guess) {
       score--;
       guessResult.classList.remove("changed");
       void guessResult.offsetWidth;
       if (guess > randomNumber) {
         guessResult.textContent = "Too High";
-
         updateScore();
       } else if (guess < randomNumber) {
         guessResult.textContent = "Too Low";
@@ -73,9 +80,13 @@ checkButton.addEventListener("click", (e) => {
         guessResult.textContent = "Correct Number";
         guessResult.classList.add("correct");
         checkButton.textContent = "New Game";
+        updateScore();
         updateHighestScore();
+        body.style.backgroundColor = "#00ced1";
       }
       guessResult.classList.add("changed");
+    } else {
+      guessResult.textContent = "No Number";
     }
   }
 });

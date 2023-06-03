@@ -138,7 +138,8 @@ body {
 .scores span {
   color: #9802ca;
 }
-.correct {
+.correct,
+.dark .correct {
   background-color: #00ced1;
   color: white;
 }
